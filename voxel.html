@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+	<title>VoxelJS</title>
+	<script type='text/javascript' src='jquery.js'></script>
+	<script type='text/javascript' src='voxel.js'></script>
+	<script type='text/javascript'>
+		$(function() {
+			/* create map */
+			var map = voxel().map([20,20,5]);
+			for(var i = 0; i < 20*20; ++i) {
+				map.set(i, 'tile');
+			}
+
+			/* render map */
+			var cx = $('#map').width() / 2;
+			var cy = $('#map').height() / 2;
+			
+			var html = '';
+
+			for(var x = 0; x < 20; ++x) {
+				for(var y = 0; y < 20; ++y) {
+					var cursor = map.cursor([x,y,0]);
+					var tile = map.get(cursor);
+						
+					if(undefined === tile)
+						continue;
+
+					html += '<div class=\'tile\' style=\'top: ' + (cy + 9 * y) + 
+								'px; left: ' + (cx - 32 * x + 16*y) + 'px;\'></div>';
+				}
+			}
+
+			$('#map').html(html);
+
+		});
+	</script>
+	<style type='text/css'>
+		#map {
+			background: #878787;
+			height: 500px;
+			left: 0px;
+			position: relative;
+			top: 0px;
+			width: 100%;
+			z-index: 1;
+		}
+
+		.tile {
+			background-image: url('tile.png');
+			height: 28px;
+			position: absolute;
+			width: 32px;
+			z-index: 2;
+		}
+
+		.tile:hover {
+			opacity: 0.6;
+		}
+	</style>
+</head>
+<body>
+	<div id='map'>
+	</div>
+</body>
+</html>
