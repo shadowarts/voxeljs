@@ -27,7 +27,7 @@ function voxel() {
 		};
 		
 		/* initialize */
-		_map = {};
+		_map = [];
 
 		return {
 			/* cursor constants */

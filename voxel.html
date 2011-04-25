@@ -12,33 +12,51 @@
 				map.set(i, 'tile');
 			}
 
+			for(var i = 20*20; i < 20*20 + 1; ++i) {
+				map.set(i, 'tile');
+			}
+
 			/* render map */
 			var cx = $('#map').width() / 2;
 			var cy = $('#map').height() / 2;
 			
 			var html = '';
+			var cursor;
+			var tile;
 
-			for(var x = 0; x < 20; ++x) {
-				for(var y = 0; y < 20; ++y) {
-					var cursor = map.cursor([x,y,0]);
-					var tile = map.get(cursor);
+
+			for(var z = 0; z < 5; ++z) {
+				for(var x = 0; x < 20; ++x) {
+					for(var y = 0; y < 20; ++y) {
+						cursor = map.cursor([x,y,z]);
+						tile = map.get(cursor);
 						
-					if(undefined === tile)
-						continue;
+						if(tile === undefined) {
+							continue;
+						}
 
-					html += '<div class=\'tile\' style=\'top: ' + (cy + 9 * y) + 
-								'px; left: ' + (cx - 32 * x + 16*y) + 'px;\'></div>';
+						var vx, vy;
+						vx = (x - y) * 16;
+						vy = ((x/2) + (y/2)) * 18 - z * 8;
+
+						html += '<div title=\'' + x + ', ' + y + ', ' + z + 
+								'\' class=\'tile\' style=\'top:' + (cy + vy) + 
+								'px;left:' + (cx + vx) + 'px;\'></div>';
+					}
 				}
 			}
-
+				
 			$('#map').html(html);
-
 		});
 	</script>
 	<style type='text/css'>
+		body {
+			background: #474747;
+		}
+
 		#map {
-			background: #878787;
-			height: 500px;
+			background: #474747;
+			height: 700px;
 			left: 0px;
 			position: relative;
 			top: 0px;
