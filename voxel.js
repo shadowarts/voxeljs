@@ -30,25 +30,17 @@ function voxel() {
 		_map = [];
 
 		return {
-			/* cursor constants */
-			Up: _scalar_multiply([0,0,1]),
-			Down: _scalar_multiply([0,0,-1]),
-			North: _scalar_multiply([0,1,0]),
-			South: _scalar_multiply([0,-1,0]),
-			East: _scalar_multiply([1,0,0]),
-			West: _scalar_multiply([-1,0,0]),
-			
-			cursor: _to_cursor,
-			vector: _to_vector,
-
-			get: function(cursor) {
-				return _map[cursor];
+			get: function(vector) {
+				return _map[_to_cursor(vector)];
 			},
 
-			set: function(cursor, value) {
+			set: function(vector, value) {
 				var ret;
+				var cursor;
 
-					ret = _map[cursor];
+				cursor = _to_cursor(vector);
+
+				ret = _map[cursor];
 				_map[cursor] = value;
 
 				return ret;

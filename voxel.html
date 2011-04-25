@@ -7,13 +7,20 @@
 	<script type='text/javascript'>
 		$(function() {
 			/* create map */
-			var map = voxel().map([20,20,5]);
-			for(var i = 0; i < 20*20; ++i) {
-				map.set(i, 'tile');
-			}
 
-			for(var i = 20*20; i < 20*20 + 1; ++i) {
-				map.set(i, 'tile');
+			var map = voxel().map([20,20,5]);
+			
+			for(var z = 0; z < 5; ++z) {
+				for(var x = 0; x < 20; ++x) {
+					for(var y = 0; y < 20; ++y) {
+						if(z < 1) {
+							map.set([x,y,z], 'tile');
+						} else if(x*y < z) {
+							map.set([x,y,z], 'tile');
+							
+						}
+					}
+				}
 			}
 
 			/* render map */
@@ -24,12 +31,13 @@
 			var cursor;
 			var tile;
 
+			var start = (new Date).getTime();
+
 
 			for(var z = 0; z < 5; ++z) {
 				for(var x = 0; x < 20; ++x) {
 					for(var y = 0; y < 20; ++y) {
-						cursor = map.cursor([x,y,z]);
-						tile = map.get(cursor);
+						tile = map.get([x,y,z]);
 						
 						if(tile === undefined) {
 							continue;
@@ -46,7 +54,10 @@
 				}
 			}
 				
-			$('#map').html(html);
+			$('#map').html(html).ready(function() {
+				console.log(((new Date).getTime() - start) + 'ms');
+			});
+
 		});
 	</script>
 	<style type='text/css'>
