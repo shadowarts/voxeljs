@@ -75,11 +75,13 @@ define(['jquery'], function($, undefined) {
 			if(undefined !== fn) {
 				return (_states[name] = fn);
 			}
-				
-			var state = _states[name];
-			if(undefined !== name) {
-				state.apply(fn);
-			}
+
+			setTimeout(function() {
+				var state = _states[name];
+				if(undefined !== name) {
+					state.apply(fn);
+				}
+			}, 1);
 		});
 	})();
 

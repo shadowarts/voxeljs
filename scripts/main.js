@@ -11,20 +11,21 @@ function pause(millis)
 }
 
 	voxel('#map', function() {
-		voxel.state('load', function() {
-			console.log('loading...');
-			
-			/* initialize layers */
+		voxel.state('initialize', function() {
+			console.log('initializing...');
+
 			voxel.layer('map');
 			voxel.layer('gui');
 
-			/* display test */
-			var wait=true;
-			voxel.layer('gui').html('<h1>Loading...</h1>').ready(function() {
-				wait = false;
-			});
-			while(wait);
+			/* display loading screen */
+			voxel.layer('gui').html('<h1>Loading...</h1>');
 
+			voxel.state('load');
+		});
+
+		voxel.state('load', function() {
+			console.log('loading...');
+			
 			/* create map */
 			_map = voxel.map([20, 20, 5]);
 			for(var z = 0; z < 5; ++z) {
@@ -78,13 +79,14 @@ function pause(millis)
 					}
 				}
 			}
+			console.log('map');
+			pause(5000);
 			voxel.layer('map').html(html);
-	
 
 			voxel.state('loop');
 		});
 
-		voxel.state('load');
+		voxel.state('initialize');
 	});
 
 });
