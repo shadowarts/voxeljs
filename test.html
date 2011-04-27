@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<title>VoxelJS</title>
+	<script type='text/javascript' data-main='scripts/main' 
+			src='scripts/require-jquery.js'></script>
+	</script>
+	<style type='text/css'>
+		body {
+			background: #474747;
+		}
+
+		#map {
+			background: #474747;
+			height: 700px;
+			left: 0px;
+			position: absolute;
+			top: 0px;
+			width: 100%;
+			z-index: 1;
+		}
+
+		.tile {
+			background-image: url('tile.png');
+			height: 28px;
+			position: absolute;
+			width: 32px;
+			z-index: 2;
+		}
+
+		.__layer__ {
+			position: absolute;
+			top:0px;
+			left: 0px;
+		}
+
+		.tile:hover {
+			opacity: 0.6;
+		}
+	</style>
+</head>
+<body>
+	<div id='map'>
+	</div>
+</body>
+</html>
