@@ -2,14 +2,6 @@ define(['jquery', 'voxel'], function($, voxel, undefined) {
 	
 	var _map = [];
 
-function pause(millis)
- {
-  var date = new Date();
-  var curDate = null;
-  do { curDate = new Date(); }
-  while(curDate-date < millis);
-}
-
 	voxel('#map', function() {
 		voxel.state('initialize', function() {
 			console.log('initializing...');
@@ -42,7 +34,6 @@ function pause(millis)
 				}
 			}
 
-			pause(5000);
 			voxel.state('game');
 		});
 
@@ -52,9 +43,8 @@ function pause(millis)
 
 		voxel.state('game', function() {
 			console.log('game');
-			//voxel.layer('gui').clear();
 
-		/* render map */
+			/* render map */
 			var cx = $('#map').width() / 2;
 			var cy = $('#map').height() / 2;
 			
@@ -81,16 +71,22 @@ function pause(millis)
 					}
 				}
 			}
+			voxel.log(10, 'omg!');
 			console.log('map');
-			pause(5000);
 			voxel.layer('map').html(html);
 
 			voxel.state('loop');
 		});
 
 		voxel.state('initialize');
+
+		voxel.bind('message', function(pri,msg) {
+			alert(pri);
+			alert(msg);
+		});
 	});
 
 });
+
 /* vim: set ts=2 sw=2 tw=80: */
 
