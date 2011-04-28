@@ -14,11 +14,13 @@ function pause(millis)
 		voxel.state('initialize', function() {
 			console.log('initializing...');
 
+			voxel.layer('bg');
 			voxel.layer('map');
 			voxel.layer('gui');
 
 			/* display loading screen */
-			voxel.layer('gui').html('<h1>Loading...</h1>');
+			voxel.layer('gui').html('<h1 style="position: absolute; top: 100px; left: 100px; z-index: -50; color: white;">Loading...</h1>');
+			voxel.layer('bg').html('<img src="example.png" style="position: absolute; top: 100px; left: 100px; z-index: 1000;" />');
 
 			voxel.state('load');
 		});
